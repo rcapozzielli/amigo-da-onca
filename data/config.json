@@ -1,0 +1,14 @@
+{
+  "cadastro": {
+    "formAction": "",
+    "campoNome": "",
+    "campoChave": "",
+    "csv": ""
+  },
+  "sugestoes": {
+    "formAction": "",
+    "campoPara": "",
+    "campoTexto": "",
+    "csv": ""
+  }
+}
