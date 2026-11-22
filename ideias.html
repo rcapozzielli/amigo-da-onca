@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ideias · Amigo da Onça</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="emoji-grande" aria-hidden="true">💡</span>
+      <h1>Ideias horríveis</h1>
+      <p>Sem criatividade? A onça ajuda.</p>
+    </section>
+
+    <section class="cartao cartao-noite" style="text-align:center">
+      <h2>🎲 Me dá uma ideia</h2>
+      <p class="ideia-sorteada" id="ideia-sorteada" aria-live="polite">Toque no botão e prepare-se para o pior.</p>
+      <button class="botao" id="botao-ideia" type="button">Sortear ideia ruim</button>
+    </section>
+
+    <section class="cartao">
+      <h2>📦 Catálogo completo</h2>
+      <ul class="ideias" id="lista-ideias"><li>Carregando bobagens…</li></ul>
+    </section>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/ideias.js"></script>
+</body>
+</html>

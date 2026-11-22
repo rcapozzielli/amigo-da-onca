@@ -1,0 +1,174 @@
+/* Amigo da Onça — tema praia + réveillon + oncinha */
+:root {
+  --noite: #14213d;
+  --noite-2: #1d2f57;
+  --areia: #fdf3dc;
+  --areia-2: #f6e3b4;
+  --onca: #e9a23b;
+  --onca-escura: #3b2a1a;
+  --mar: #2ec4b6;
+  --coral: #ff6b6b;
+  --texto: #241a12;
+  --texto-claro: #fdf3dc;
+  --raio: 18px;
+  --sombra: 0 6px 0 var(--onca-escura);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--texto);
+  background-color: var(--areia);
+  /* manchas de onça bem sutis no fundo */
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(59, 42, 26, .07) 0 9px, transparent 10px),
+    radial-gradient(circle at 70% 60%, rgba(59, 42, 26, .07) 0 7px, transparent 8px),
+    radial-gradient(circle at 45% 85%, rgba(233, 162, 59, .12) 0 12px, transparent 13px);
+  background-size: 140px 140px;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 { font-family: "Bagel Fat One", "Nunito", system-ui, sans-serif; font-weight: 400; line-height: 1.15; }
+a { color: inherit; }
+
+/* ---------- Cabeçalho ---------- */
+.topo {
+  background: var(--noite);
+  color: var(--texto-claro);
+  padding: 12px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.topo-inner { max-width: 760px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.logo { font-family: "Bagel Fat One", sans-serif; font-size: 1.35rem; text-decoration: none; color: var(--onca); white-space: nowrap; }
+.menu { display: flex; gap: 6px; flex-wrap: wrap; }
+.menu a {
+  text-decoration: none;
+  font-weight: 800;
+  font-size: .85rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--noite-2);
+}
+.menu a[aria-current="page"] { background: var(--onca); color: var(--onca-escura); }
+
+/* ---------- Conteúdo ---------- */
+main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 24px 16px 48px; }
+
+.hero { text-align: center; padding: 16px 0 8px; }
+.hero h1 { font-size: clamp(2.2rem, 9vw, 3.6rem); margin: 0 0 8px; color: var(--onca-escura); }
+.hero .emoji-grande { font-size: 3.5rem; display: block; animation: balanca 2.4s ease-in-out infinite; }
+.hero p { font-size: 1.1rem; margin: 0 auto; max-width: 34ch; }
+
+@keyframes balanca { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+
+.cartao {
+  background: #fff;
+  border: 3px solid var(--onca-escura);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 20px;
+  margin: 24px 0;
+}
+.cartao h2 { margin-top: 0; font-size: 1.6rem; }
+
+.cartao-noite { background: var(--noite); color: var(--texto-claro); }
+.cartao-noite h2 { color: var(--onca); }
+
+/* ---------- Contagem regressiva ---------- */
+.contador { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center; margin: 12px 0 4px; }
+.contador div { background: var(--noite-2); border-radius: 12px; padding: 10px 4px; }
+.contador strong { display: block; font-family: "Bagel Fat One", sans-serif; font-size: clamp(1.5rem, 7vw, 2.2rem); color: var(--onca); font-weight: 400; }
+.contador span { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; }
+.contador-titulo { margin: 0; font-weight: 800; }
+.contador-fim { grid-column: 1 / -1; margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--onca); }
+
+/* ---------- Grade de atalhos ---------- */
+.atalhos { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.atalho {
+  display: block;
+  text-decoration: none;
+  background: var(--areia-2);
+  border: 3px solid var(--onca-escura);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 16px;
+  font-weight: 800;
+  transition: transform .1s;
+}
+.atalho:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--onca-escura); }
+.atalho .ico { font-size: 2rem; display: block; }
+.atalho small { display: block; font-weight: 600; opacity: .8; }
+
+/* ---------- Listas ---------- */
+.regras { padding-left: 0; list-style: none; counter-reset: regra; }
+.regras li { counter-increment: regra; position: relative; padding: 0 0 14px 48px; }
+.regras li::before {
+  content: counter(regra);
+  position: absolute; left: 0; top: 0;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--onca); color: var(--onca-escura);
+  font-family: "Bagel Fat One", sans-serif;
+  display: grid; place-items: center;
+}
+
+.ideias { list-style: none; padding: 0; display: grid; gap: 10px; }
+.ideias li { background: var(--areia); border-radius: 12px; padding: 10px 14px; border-left: 6px solid var(--onca); }
+
+/* ---------- Botões e formulários ---------- */
+.botao {
+  display: inline-block;
+  font: inherit;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  border: 3px solid var(--onca-escura);
+  border-radius: 999px;
+  background: var(--onca);
+  color: var(--onca-escura);
+  padding: 12px 22px;
+  box-shadow: 0 4px 0 var(--onca-escura);
+  text-decoration: none;
+}
+.botao:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--onca-escura); }
+.botao:disabled { opacity: .55; cursor: wait; }
+.botao-mar { background: var(--mar); }
+
+.ideia-sorteada {
+  font-size: 1.3rem;
+  font-weight: 800;
+  min-height: 3.2em;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  margin: 12px 0;
+}
+
+label { display: block; font-weight: 800; margin: 14px 0 6px; }
+input, select, textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem; /* evita zoom no iPhone */
+  padding: 12px;
+  border: 3px solid var(--onca-escura);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--texto);
+}
+textarea { min-height: 110px; resize: vertical; }
+
+.aviso { background: var(--areia-2); border-radius: 12px; padding: 12px 14px; font-weight: 600; }
+.erro { background: #ffe1e1; color: #8a1c1c; border-radius: 12px; padding: 12px 14px; font-weight: 700; }
+.ok { background: #d9f7f3; color: #0f5a52; border-radius: 12px; padding: 12px 14px; font-weight: 700; }
+.oculto { display: none !important; }
+
+/* ---------- Rodapé ---------- */
+.rodape { text-align: center; padding: 20px 16px 28px; font-size: .85rem; opacity: .75; }

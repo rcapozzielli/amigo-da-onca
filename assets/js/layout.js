@@ -1,0 +1,27 @@
+// Cabeçalho e rodapé compartilhados por todas as páginas.
+(function () {
+  const paginas = [
+    { href: "index.html", texto: "Início" },
+    { href: "regras.html", texto: "Regras" },
+    { href: "ideias.html", texto: "Ideias" },
+  ];
+
+  const atual = location.pathname.split("/").pop() || "index.html";
+
+  const menu = paginas
+    .map((p) => `<a href="${p.href}"${p.href === atual ? ' aria-current="page"' : ""}>${p.texto}</a>`)
+    .join("");
+
+  document.body.insertAdjacentHTML(
+    "afterbegin",
+    `<header class="topo"><div class="topo-inner">
+       <a class="logo" href="index.html">🐆 Amigo da Onça</a>
+       <nav class="menu" aria-label="Menu">${menu}</nav>
+     </div></header>`
+  );
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `<footer class="rodape">Réveillon Juquehy 2027 · feito com muito carinho e pouco bom gosto</footer>`
+  );
+})();
