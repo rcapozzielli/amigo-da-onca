@@ -1,0 +1,13 @@
+# Segredos do organizador: NUNCA versionar
+segredos/
+*.key
+chave_recuperacao*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Sistema
+.DS_Store
+Thumbs.db
