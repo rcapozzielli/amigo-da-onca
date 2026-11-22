@@ -2,8 +2,11 @@
 (function () {
   const paginas = [
     { href: "index.html", texto: "Início" },
-    { href: "regras.html", texto: "Regras" },
+    { href: "cadastro.html", texto: "Inscrição" },
+    { href: "descobrir.html", texto: "Descobrir" },
+    { href: "sugerir.html", texto: "Sugerir" },
     { href: "ideias.html", texto: "Ideias" },
+    { href: "regras.html", texto: "Regras" },
   ];
 
   const atual = location.pathname.split("/").pop() || "index.html";

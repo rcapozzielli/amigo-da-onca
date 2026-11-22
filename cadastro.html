@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscrição · Amigo da Onça</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="emoji-grande" aria-hidden="true">✍️</span>
+      <h1>Inscrição</h1>
+      <p>Escolha seu nome e crie uma senha. É com ela que você vai descobrir quem tirou.</p>
+    </section>
+
+    <section class="cartao">
+      <p class="aviso oculto" id="aviso-sorteado">⚠️ O sorteio já foi feito. Só se inscreva de novo se <strong>esqueceu a senha</strong>, e depois avise o organizador para ele liberar sua senha nova.</p>
+
+      <form id="form-cadastro" novalidate>
+        <label for="nome">Quem é você?</label>
+        <select id="nome" required></select>
+
+        <label for="senha">Crie uma senha (mínimo 6 caracteres)</label>
+        <input id="senha" type="password" autocomplete="new-password" minlength="6" required>
+
+        <label for="senha2">Repita a senha</label>
+        <input id="senha2" type="password" autocomplete="new-password" minlength="6" required>
+
+        <p class="aviso oculto" id="ja-inscrito">
+          Você já tem inscrição. Se enviar de novo, sua senha antiga para de valer.
+          <label style="font-weight:600;margin-top:8px"><input type="checkbox" id="confirma-reinscricao" style="width:auto"> Quero trocar minha senha</label>
+        </p>
+
+        <p class="aviso" style="margin-top:16px">🔒 Sua senha <strong>não sai do seu celular</strong>. Nem o organizador sabe qual é. Então anote num lugar seguro!</p>
+
+        <p class="erro oculto" id="erro" role="alert"></p>
+        <p style="text-align:center;margin-top:18px">
+          <button class="botao" id="botao-enviar" type="submit">Me inscrever</button>
+        </p>
+      </form>
+
+      <div class="ok oculto" id="sucesso" role="status">
+        <p>✅ Inscrição feita, <span id="nome-ok"></span>!</p>
+        <p>Guarde sua senha. Quando o sorteio sair, volte aqui no site e vá em <a href="descobrir.html">Descobrir</a>.</p>
+      </div>
+    </section>
+
+    <section class="cartao cartao-noite">
+      <h2>📋 Quem já se inscreveu</h2>
+      <div id="progresso">Carregando…</div>
+      <p style="font-size:.85rem;opacity:.8">A lista pode levar alguns minutos para atualizar.</p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tweetnacl/1.0.3/nacl-fast.min.js"></script>
+  <script src="assets/js/cripto.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/dados.js"></script>
+  <script src="assets/js/cadastro.js"></script>
+</body>
+</html>

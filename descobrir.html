@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Descobrir · Amigo da Onça</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="emoji-grande" aria-hidden="true">🎁</span>
+      <h1>Quem eu tirei?</h1>
+      <p>Confira se ninguém está olhando sua tela. A onça está.</p>
+    </section>
+
+    <!-- Antes do sorteio -->
+    <section class="cartao cartao-noite oculto" id="nao-liberado">
+      <h2>⏳ Sorteio ainda não liberado</h2>
+      <p>O sorteio só acontece quando todo mundo estiver inscrito e o organizador liberar.</p>
+      <div id="progresso">Carregando…</div>
+      <p><a class="botao" href="cadastro.html">Ainda não me inscrevi</a></p>
+    </section>
+
+    <!-- Login -->
+    <section class="cartao oculto" id="entrar">
+      <form id="form-entrar" novalidate>
+        <label for="nome">Quem é você?</label>
+        <select id="nome" required></select>
+
+        <label for="senha">Sua senha</label>
+        <input id="senha" type="password" autocomplete="current-password" required>
+
+        <p class="erro oculto" id="erro" role="alert"></p>
+        <p style="text-align:center;margin-top:18px">
+          <button class="botao" id="botao-entrar" type="submit">Revelar 🥁</button>
+        </p>
+        <p style="font-size:.9rem">Esqueceu a senha? Faça a <a href="cadastro.html">inscrição de novo</a> com uma senha nova e avise o organizador. Ele libera sem ver quem você tirou.</p>
+      </form>
+    </section>
+
+    <!-- Resultado -->
+    <section class="cartao cartao-noite oculto" id="resultado" style="text-align:center">
+      <p style="margin:0">Você tirou…</p>
+      <p class="nome-sorteado" id="nome-sorteado"></p>
+      <p>Agora capricha no presente <strong>horrível</strong>. E bico calado! 🤐</p>
+      <button class="botao" id="botao-esconder" type="button">Esconder</button>
+    </section>
+
+    <section class="cartao oculto" id="bloco-sugestoes">
+      <h2>🤫 Sugestões anônimas para <span id="nome-sugestoes"></span></h2>
+      <ul class="ideias" id="lista-sugestoes"></ul>
+      <p style="font-size:.9rem">Sem ideia? Veja o <a href="ideias.html">catálogo de presentes horríveis</a>.</p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tweetnacl/1.0.3/nacl-fast.min.js"></script>
+  <script src="assets/js/cripto.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/dados.js"></script>
+  <script src="assets/js/descobrir.js"></script>
+</body>
+</html>

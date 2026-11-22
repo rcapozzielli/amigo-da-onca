@@ -172,3 +172,13 @@ textarea { min-height: 110px; resize: vertical; }
 
 /* ---------- Rodapé ---------- */
 .rodape { text-align: center; padding: 20px 16px 28px; font-size: .85rem; opacity: .75; }
+
+/* ---------- Revelação ---------- */
+.nome-sorteado {
+  font-family: "Bagel Fat One", sans-serif;
+  font-size: clamp(2.4rem, 12vw, 4rem);
+  color: var(--onca);
+  margin: 8px 0 12px;
+  animation: surge .6s cubic-bezier(.2, 1.6, .4, 1);
+}
+@keyframes surge { from { transform: scale(.2) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }

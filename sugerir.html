@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sugerir · Amigo da Onça</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="emoji-grande" aria-hidden="true">🤫</span>
+      <h1>Sugerir presente</h1>
+      <p>Conhece alguém bem? Ajude quem tirou essa pessoa a acertar no presente errado.</p>
+    </section>
+
+    <section class="cartao">
+      <form id="form-sugestao" novalidate>
+        <label for="para">Para quem é a sugestão?</label>
+        <select id="para" required></select>
+
+        <label for="texto">Sua ideia de presente ruim</label>
+        <textarea id="texto" maxlength="500" required placeholder="Ex.: uma toalha com a cara do Faustão"></textarea>
+
+        <p class="aviso" style="margin-top:16px">🕵️ É <strong>anônimo</strong>. Só quem tirou essa pessoa vai ver a sugestão.</p>
+
+        <p class="erro oculto" id="erro" role="alert"></p>
+        <p style="text-align:center;margin-top:18px">
+          <button class="botao botao-mar" id="botao-enviar" type="submit">Mandar sugestão</button>
+        </p>
+      </form>
+      <p class="ok oculto" id="sucesso" role="status">✅ Sugestão enviada! Pode mandar outra.</p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tweetnacl/1.0.3/nacl-fast.min.js"></script>
+  <script src="assets/js/cripto.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/dados.js"></script>
+  <script src="assets/js/sugerir.js"></script>
+</body>
+</html>
