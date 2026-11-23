@@ -15,3 +15,6 @@ Thumbs.db
 # Exportações de chat (privadas)
 *.zip
 chat/
+
+# Fotos originais (só cópias reduzidas e escolhidas vão para assets/img)
+matemagico/
