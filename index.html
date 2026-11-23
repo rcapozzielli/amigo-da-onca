@@ -13,24 +13,25 @@
 </head>
 <body>
   <main>
-    <section class="hero">
-      <span class="emoji-grande" aria-hidden="true">🐆</span>
-      <h1>Amigo da Onça</h1>
-      <p>O amigo secreto onde o presente é <strong>ruim de propósito</strong>. Réveillon em Juquehy, 2027.</p>
+    <section class="hero hero-compacto">
+      <h1>🐆 Amigo da Onça</h1>
+      <p>Presente <strong>ruim de propósito</strong>. Réveillon em Juquehy.</p>
       <p class="en" lang="en">Secret Santa, but with terrible gifts.</p>
+      <p class="contador-linha" data-contador="dataViagem" data-formato="linha" data-prefixo="🚗 Juquehy em" data-fim="🏖️ Já estamos na praia!"></p>
     </section>
 
-    <section class="cartao cartao-noite">
-      <h2>🚗 Falta pouco pra viagem</h2>
-      <p class="contador-titulo">Partiu Juquehy em 27/12:</p>
-      <div class="contador" data-contador="dataViagem" data-fim="Já estamos na praia! 🏖️"></div>
-      <p style="font-size:.85rem;opacity:.8;margin-bottom:0">E da casa até a praia são só 400 metros. 0,4 km. Engenharia porraaa.</p>
+    <!-- Painel: muda conforme a fase (home.js) -->
+    <section class="cartao cartao-noite painel" id="painel" aria-live="polite">
+      <p class="painel-carregando">Aguardando mensagem. Essa ação pode levar alguns instantes.</p>
     </section>
 
-    <section class="cartao cartao-noite">
-      <h2>🎆 E pra virada</h2>
-      <p class="contador-titulo">Até 00:00 de 01/01/2027:</p>
-      <div class="contador" data-contador="dataReveillon" data-fim="FELIZ ANO NOVO! 🥂"></div>
+    <section class="cartao" style="text-align:center">
+      <h2>🎲 Ideia ruim do dia</h2>
+      <p class="ideia-sorteada" id="ideia-dia"></p>
+      <p style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:0">
+        <button class="botao" id="outra-ideia" type="button">Outra</button>
+        <a class="botao botao-mar" href="sugerir.html">🤫 Sugerir pra alguém</a>
+      </p>
     </section>
 
     <section class="cartao" style="text-align:center">
@@ -39,20 +40,16 @@
         <section><a target="_blank" rel="noopener" href="https://www.tiktok.com/@matemagico__?refer=creator_embed">@matemagico__</a></section>
       </blockquote>
     </section>
-
-    <section class="atalhos" aria-label="Atalhos">
-      <a class="atalho" href="cadastro.html"><span class="ico">✍️</span>Inscrição<small>crie sua senha</small></a>
-      <a class="atalho" href="descobrir.html"><span class="ico">🎁</span>Descobrir<small>quem eu tirei?</small></a>
-      <a class="atalho" href="sugerir.html"><span class="ico">🤫</span>Sugerir<small>ideia anônima pra alguém</small></a>
-      <a class="atalho" href="regras.html"><span class="ico">📜</span>Regras<small>como funciona a zoeira</small></a>
-      <a class="atalho" href="ideias.html"><span class="ico">💡</span>Ideias<small>presentes horríveis</small></a>
-    </section>
   </main>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tweetnacl/1.0.3/nacl-fast.min.js"></script>
+  <script src="assets/js/cripto.js"></script>
   <script src="assets/js/config.js"></script>
   <script src="assets/js/layout.js"></script>
   <script src="assets/js/figurinhas.js" defer></script>
+  <script src="assets/js/dados.js"></script>
   <script src="assets/js/contador.js"></script>
+  <script src="assets/js/home.js"></script>
   <script async src="https://www.tiktok.com/embed.js"></script>
 </body>
 </html>

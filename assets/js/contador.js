@@ -17,10 +17,15 @@
       const alvo = new Date(window.CONFIG[el.dataset.contador]).getTime();
       const falta = alvo - Date.now();
       if (falta <= 0) {
+        if (el.dataset.formato === "linha") { el.textContent = el.dataset.fim || "Chegou! 🎉"; return; }
         el.innerHTML = `<p class="contador-fim">${el.dataset.fim || "Chegou! 🎉"}</p>`;
         return;
       }
       const t = formatar(falta);
+      if (el.dataset.formato === "linha") {
+        el.textContent = `${el.dataset.prefixo || "Faltam"} ${t.dias}d ${t.horas}h ${t.min}min ${t.seg}s`;
+        return;
+      }
       el.innerHTML = `
         <div><strong>${t.dias}</strong><span>dias</span></div>
         <div><strong>${t.horas}</strong><span>horas</span></div>
