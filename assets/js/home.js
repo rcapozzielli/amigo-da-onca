@@ -10,6 +10,11 @@
     return e;
   }
 
+  // Nome guardado neste celular depois da inscrição (nunca a senha).
+  function lembrado() {
+    try { return localStorage.getItem("onca:inscrito"); } catch (e) { return null; }
+  }
+
   function botao(href, texto, extra = "") {
     return el("a", { className: "botao botao-grande " + extra, href, textContent: texto });
   }
@@ -17,6 +22,9 @@
   async function faseInscricoes() {
     painel.innerHTML = "";
     painel.append(el("h2", { textContent: "✍️ Inscrições abertas" }));
+    const eu = lembrado();
+    if (eu) painel.append(el("p", { className: "voce-dentro" }, `✅ Você tá dentro, ${eu}! `,
+      el("a", { href: "descobrir.html", textContent: "Testar minha senha" })));
     const area = el("div", {}, el("p", { textContent: "Aguardando mensagem. Essa ação pode levar alguns instantes." }));
     painel.append(area,
       el("p", { className: "painel-acao" }, botao("cadastro.html", "Tô dentro, me inscrever")),

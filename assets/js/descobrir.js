@@ -14,6 +14,7 @@
   if (!sorteio) {
     $("nao-liberado").classList.remove("oculto");
     Dados.mostrarProgresso($("progresso"));
+    prepararTeste();
     return;
   }
 
@@ -73,4 +74,42 @@
     $("nome-sorteado").textContent = "";
     $("entrar").classList.remove("oculto");
   });
+
+  // Antes do sorteio: confere se a senha digitada gera a mesma chave que está na planilha.
+  async function prepararTeste() {
+    $("testar").classList.remove("oculto");
+    await Dados.preencherSelect($("teste-nome"), "Escolha seu nome");
+    try { // celular que já se inscreveu: deixa o nome escolhido
+      const salvo = localStorage.getItem("onca:inscrito");
+      if (salvo) $("teste-nome").value = salvo;
+    } catch (e) {}
+
+    const resultado = $("teste-resultado");
+    const mostrar = (classe, texto) => { resultado.className = classe; resultado.textContent = texto; };
+
+    $("form-testar").addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const nome = $("teste-nome").value;
+      if (!nome) return mostrar("erro", "Escolha seu nome.");
+      const botao = $("botao-testar");
+      botao.disabled = true;
+      botao.textContent = "Aguardando mensagem…";
+      try {
+        const [chaves, par] = await Promise.all([Dados.chavesInscritas(), Onca.derivarChaves(nome, $("teste-senha").value)]);
+        const registrada = chaves.get(nome);
+        if (!registrada) {
+          mostrar("erro", "Não achei sua inscrição. Se você acabou de se inscrever, espere uns 5 minutos e teste de novo.");
+        } else if (registrada === Onca.b64(par.publicKey)) {
+          mostrar("ok", `✅ Tá inscrito e a senha bate, ${nome}. Boa crack!`);
+        } else {
+          mostrar("erro", "❌ Essa senha não bate com a sua inscrição. Esqueceu? Faz a inscrição de novo com uma senha nova (antes do sorteio é de boa).");
+        }
+      } catch (e) {
+        mostrar("erro", "Não consegui conferir agora. Tenta de novo daqui a pouco.");
+      } finally {
+        botao.disabled = false;
+        botao.textContent = "Testar";
+      }
+    });
+  }
 })();

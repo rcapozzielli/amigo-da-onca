@@ -50,6 +50,7 @@
       form.classList.add("oculto");
       document.getElementById("nome-ok").textContent = selNome.value;
       document.getElementById("sucesso").classList.remove("oculto");
+      try { localStorage.setItem("onca:inscrito", selNome.value); } catch (e) {} // só o nome, nunca a senha
     } catch (e) {
       mostrarErro("Deu ruim no envio. Confira a internet e tente de novo.");
       botao.disabled = false;

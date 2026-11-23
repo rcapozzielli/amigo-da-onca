@@ -70,6 +70,18 @@
     return new Set(linhas.map((l) => Onca.normalizar(coluna(l, "nome"))).filter(Boolean));
   }
 
+  // Chave pública mais recente de cada inscrito: Map(nome -> chave base64).
+  async function chavesInscritas() {
+    const cfg = await config();
+    if (!cfg.cadastro.csv) throw new Error("sem-config");
+    const mapa = new Map();
+    (await lerCSV(cfg.cadastro.csv)).forEach((l) => {
+      const nome = Onca.normalizar(coluna(l, "nome"));
+      if (nome) mapa.set(nome, coluna(l, "chave")); // linhas mais novas sobrescrevem as antigas
+    });
+    return mapa;
+  }
+
   // Sugestões feitas para `nome`.
   async function sugestoesPara(nome) {
     const cfg = await config();
@@ -124,5 +136,5 @@
     }
   }
 
-  window.Dados = { config, participantes, sorteio, inscritos, sugestoesPara, enviarForm, preencherSelect, mostrarProgresso };
+  window.Dados = { config, participantes, sorteio, inscritos, chavesInscritas, sugestoesPara, enviarForm, preencherSelect, mostrarProgresso };
 })();
