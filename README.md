@@ -89,6 +89,10 @@ O script abre o resultado da pessoa só na memória e tranca de novo com a chave
 ### Refazer o sorteio do zero
 `python scripts/sortear.py --refazer`, depois commit e push. Todo mundo vai ter um resultado novo.
 
+### Mudou CSS ou JS?
+Rode `python scripts/versao.py` antes do commit. Ele atualiza o `?v=...` dos arquivos nas páginas
+e obriga o navegador de todo mundo a baixar a versão nova.
+
 ### Trocar participantes
 Edite `data/participantes.json` **antes** das inscrições. O nome faz parte da chave: se você mudar
 um nome depois que a pessoa se inscreveu, ela precisa se inscrever de novo.
