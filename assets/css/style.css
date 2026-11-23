@@ -245,3 +245,5 @@ textarea { min-height: 110px; resize: vertical; }
 @media (prefers-reduced-motion: reduce) {
   .figurinha.chacoalha, .hero .emoji-grande { animation: none; }
 }
+.figurinha-homem img { object-position: center 20%; height: 150px; }
+.figurinha-homem { background: #fffbe6; }

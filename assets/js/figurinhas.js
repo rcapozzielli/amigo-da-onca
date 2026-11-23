@@ -19,6 +19,13 @@
     { texto: "Calma🖐️", sub: "tá ansioso?" },
   ];
 
+  // O homem (fotos enviadas pelo organizador)
+  const MATEMAGICO = [
+    "Him.", "the Mr. President", "the canibal", "What day were you born?", "a magician",
+    "he's famous on tiktok", "the alibaba", "se inspire vendo o homem", "related to Ezra Miller",
+    "que dia você nasceu?", "o homem",
+  ].map((legenda, i) => ({ img: "mm-" + String(i).padStart(2, "0") + ".jpg", legenda, homem: true }));
+
   function embaralhar(lista) {
     const a = lista.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -32,6 +39,7 @@
     const el = document.createElement("figure");
     el.className = "figurinha" + (f.texto ? " figurinha-texto" : "");
     el.style.setProperty("--giro", (Math.random() * 16 - 8).toFixed(1) + "deg");
+    if (f.homem) el.classList.add("figurinha-homem");
     if (f.img) {
       const img = document.createElement("img");
       img.src = "assets/img/fig/" + f.img;
@@ -56,7 +64,14 @@
     return el;
   }
 
-  const sorteadas = embaralhar(FIGURINHAS);
+  // Laterais: metade é o homem, metade são as outras piadas
+  const homens = embaralhar(MATEMAGICO);
+  const outras = embaralhar(FIGURINHAS);
+  const sorteadas = [];
+  for (let i = 0; i < Math.max(homens.length, outras.length); i++) {
+    if (homens[i]) sorteadas.push(homens[i]);
+    if (outras[i]) sorteadas.push(outras[i]);
+  }
 
   // Laterais (só aparecem em telas largas, via CSS)
   const lados = document.createElement("div");
@@ -65,7 +80,8 @@
   sorteadas.slice(0, 6).forEach((f, i) => {
     const el = criar(f);
     el.style.top = 90 + Math.floor(i / 2) * 230 + Math.random() * 40 + "px";
-    el.classList.add(i % 2 ? "lado-direito" : "lado-esquerdo");
+    // alterna o lado a cada linha, para o homem aparecer dos dois lados
+    el.classList.add((i + Math.floor(i / 2)) % 2 ? "lado-direito" : "lado-esquerdo");
     lados.appendChild(el);
   });
   document.body.appendChild(lados);
