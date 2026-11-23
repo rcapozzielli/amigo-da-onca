@@ -16,6 +16,7 @@
       <span class="emoji-grande" aria-hidden="true">✍️</span>
       <h1>Inscrição</h1>
       <p>Escolha seu nome e crie uma senha. É com ela que você vai descobrir quem tirou.</p>
+      <p class="en" lang="en">Pick your name and create a password. You'll need it to see who you got.</p>
     </section>
 
     <section class="cartao">
@@ -36,23 +37,25 @@
           <label style="font-weight:600;margin-top:8px"><input type="checkbox" id="confirma-reinscricao" style="width:auto"> Quero trocar minha senha</label>
         </p>
 
-        <p class="aviso" style="margin-top:16px">🔒 Sua senha <strong>não sai do seu celular</strong>. Nem o organizador sabe qual é. Então anote num lugar seguro!</p>
+        <p class="aviso" style="margin-top:16px">🔒 Sua senha <strong>não sai do seu celular</strong>. Nem o organizador sabe qual é. Então anote num lugar seguro!
+          <span class="en" lang="en">Your password never leaves your phone. Write it down!</span></p>
 
         <p class="erro oculto" id="erro" role="alert"></p>
         <p style="text-align:center;margin-top:18px">
-          <button class="botao" id="botao-enviar" type="submit">Me inscrever</button>
+          <button class="botao" id="botao-enviar" type="submit">Tô dentro, não sou antiresenha</button>
         </p>
       </form>
 
       <div class="ok oculto" id="sucesso" role="status">
-        <p>✅ Inscrição feita, <span id="nome-ok"></span>!</p>
+        <p>✅ Inscrição feita, <span id="nome-ok"></span>! Faria lor.</p>
+        <p class="en" lang="en">You're in! Come back to "Descobrir" after the draw.</p>
         <p>Guarde sua senha. Quando o sorteio sair, volte aqui no site e vá em <a href="descobrir.html">Descobrir</a>.</p>
       </div>
     </section>
 
     <section class="cartao cartao-noite">
       <h2>📋 Quem já se inscreveu</h2>
-      <div id="progresso">Carregando…</div>
+      <div id="progresso">Aguardando mensagem. Essa ação pode levar alguns instantes.</div>
       <p style="font-size:.85rem;opacity:.8">A lista pode levar alguns minutos para atualizar.</p>
     </section>
   </main>

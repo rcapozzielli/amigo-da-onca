@@ -32,12 +32,12 @@
 
     const botao = $("botao-entrar");
     botao.disabled = true;
-    botao.textContent = "Abrindo o envelope… 🥁";
+    botao.textContent = "Aguardando mensagem. Essa ação pode levar alguns instantes.";
     try {
       const par = await Onca.derivarChaves(nome, senha);
       const tirou = Onca.b64(par.publicKey) === entrada.chave ? Onca.abrir(entrada.pessoa, par.secretKey) : null;
       if (!tirou) {
-        return mostrarErro("Senha errada. Se você refez a inscrição depois do sorteio, peça para o organizador liberar a senha nova.");
+        return mostrarErro("Senha errada. Tá larpando? (Wrong password.) Se você refez a inscrição depois do sorteio, peça para o organizador liberar a senha nova.");
       }
 
       $("senha").value = "";
@@ -47,7 +47,7 @@
 
       $("nome-sugestoes").textContent = tirou;
       const lista = $("lista-sugestoes");
-      lista.innerHTML = "<li>Carregando…</li>";
+      lista.innerHTML = "<li>Aguardando mensagem. Essa ação pode levar alguns instantes.</li>";
       $("bloco-sugestoes").classList.remove("oculto");
       try {
         const sugestoes = await Dados.sugestoesPara(tirou);

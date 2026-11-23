@@ -53,7 +53,7 @@
     } catch (e) {
       mostrarErro("Deu ruim no envio. Confira a internet e tente de novo.");
       botao.disabled = false;
-      botao.textContent = "Me inscrever";
+      botao.textContent = "Tô dentro, não sou antiresenha";
     }
   });
 })();
