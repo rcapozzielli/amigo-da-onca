@@ -13,12 +13,20 @@ import hashlib
 import io
 import json
 import random
+import sys
 import unicodedata
 import urllib.request
 from pathlib import Path
 
 from nacl.public import Box, PrivateKey, PublicKey
 from nacl.utils import random as bytes_aleatorios
+
+# Terminal do Windows usa cp1252 e quebra ao imprimir emoji (🐆). Força UTF-8 na saída.
+for _saida in (sys.stdout, sys.stderr):
+    try:
+        _saida.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
 
 RAIZ = Path(__file__).resolve().parent.parent
 ARQ_PARTICIPANTES = RAIZ / "data" / "participantes.json"
