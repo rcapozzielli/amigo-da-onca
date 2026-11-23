@@ -72,13 +72,93 @@
     );
   }
 
-  try {
-    (await Dados.sorteio()) ? faseSorteio() : await faseInscricoes();
-  } catch (e) {
-    await faseInscricoes();
+  // Fase 3: dia da troca (de 00:00 do dia até 6h depois do horário marcado).
+  function ehDiaDaTroca() {
+    if (!window.CONFIG.dataTroca) return false;
+    const troca = new Date(window.CONFIG.dataTroca);
+    const inicio = new Date(troca); inicio.setHours(0, 0, 0, 0);
+    const agora = new Date();
+    return agora >= inicio && agora <= new Date(troca.getTime() + 6 * 3600000);
+  }
+
+  async function faseTroca() {
+    const troca = new Date(window.CONFIG.dataTroca);
+    const relogio = el("p", { className: "relogio-troca" });
+    const roleta = el("p", { className: "roleta", textContent: "?" });
+    const girar = el("button", { className: "botao", type: "button", textContent: "🎰 Quem começa?" });
+    painel.innerHTML = "";
+    painel.append(
+      el("h2", { textContent: "🎁 É HOJE!" }), relogio,
+      el("h3", { className: "vergonha-titulo", textContent: "Roleta: quem entrega primeiro" }), roleta,
+      el("p", {}, girar),
+      el("p", { className: "painel-acao" }, botao("descobrir.html", "Esqueci quem eu tirei")),
+    );
+    const tique = () => {
+      const falta = troca - Date.now();
+      if (falta <= 0) { relogio.textContent = "É AGORA! Cada um com seu presente horrível. 🐆"; return; }
+      const s = Math.floor(falta / 1000);
+      relogio.textContent = `Faltam ${Math.floor(s / 3600)}h ${Math.floor((s % 3600) / 60)}min ${s % 60}s`;
+    };
+    tique(); setInterval(tique, 1000);
+
+    const nomes = await Dados.participantes();
+    girar.addEventListener("click", () => {
+      girar.disabled = true;
+      let passos = 0;
+      const total = 25 + Math.floor(Math.random() * 10);
+      const rodar = () => {
+        roleta.textContent = nomes[Math.floor(Math.random() * nomes.length)];
+        if (++passos < total) setTimeout(rodar, 40 + passos * 6); // vai desacelerando
+        else { roleta.classList.add("roleta-fim"); girar.disabled = false; }
+      };
+      roleta.classList.remove("roleta-fim");
+      rodar();
+    });
+  }
+
+  async function montarPainel() {
+    try {
+      if (ehDiaDaTroca()) return await faseTroca();
+      (await Dados.sorteio()) ? faseSorteio() : await faseInscricoes();
+    } catch (e) {
+      await faseInscricoes();
+    }
+  }
+
+  // Termômetro: barras com o número de sugestões de cada um.
+  async function montarTermometro() {
+    const caixa = document.getElementById("termometro");
+    try {
+      const contagem = [...(await Dados.contagemSugestoes()).entries()].sort((a, b) => b[1] - a[1]);
+      const max = Math.max(1, ...contagem.map(([, n]) => n));
+      caixa.innerHTML = "";
+      contagem.forEach(([nome, n], i) => {
+        const fogo = n === 0 ? "🧊" : i === 0 ? "🔥🔥🔥" : n >= max / 2 ? "🔥" : "";
+        caixa.append(el("div", { className: "termo-linha" },
+          el("span", { className: "termo-nome", textContent: nome }),
+          el("span", { className: "termo-barra" }, el("span", { style: `width:${(n / max) * 100}%` })),
+          el("span", { className: "termo-num", textContent: `${n} ${fogo}` })));
+      });
+    } catch (e) {
+      caixa.textContent = "Não consegui carregar o termômetro agora.";
+    }
+  }
+
+  // Prévia do mural: as 3 mensagens mais novas.
+  async function montarMural() {
+    const caixa = document.getElementById("mural-previa");
+    try {
+      const msgs = (await Dados.mensagensMural()).slice(0, 3);
+      caixa.innerHTML = "";
+      if (!msgs.length) return caixa.append(el("p", { textContent: "Ninguém escreveu nada ainda. Seja o primeiro larper." }));
+      msgs.forEach((m) => caixa.append(window.Mural.cartao(m)));
+    } catch (e) {
+      caixa.textContent = e.message === "sem-config" ? "O mural abre em breve. Calma🖐️" : "Não consegui carregar o mural agora.";
+    }
   }
 
   // Ideia ruim do dia: muda uma vez por dia; "Outra" sorteia na hora.
+  async function montarIdeia() {
   const saida = document.getElementById("ideia-dia");
   try {
     const ideias = await (await fetch("data/ideias.json", { cache: "no-cache" })).json();
@@ -94,4 +174,8 @@
   } catch (e) {
     saida.textContent = "Aguardando mensagem. Essa ação pode levar alguns instantes.";
   }
+  }
+
+  // Tudo carrega em paralelo: a planilha lenta não segura o resto da página.
+  montarPainel(); montarTermometro(); montarMural(); montarIdeia();
 })();

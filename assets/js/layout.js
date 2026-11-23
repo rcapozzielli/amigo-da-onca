@@ -3,6 +3,7 @@
   const paginas = [
     { href: "index.html", texto: "Início" },
     { href: "descobrir.html", texto: "Descobrir" },
+    { href: "mural.html", texto: "Mural" },
     { href: "sugerir.html", texto: "Sugerir" },
     { href: "ideias.html", texto: "Ideias" },
     { href: "regras.html", texto: "Regras" },

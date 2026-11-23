@@ -10,5 +10,11 @@
     "campoPara": "entry.1935383169",
     "campoTexto": "entry.526153208",
     "csv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQCaZjP-FiatGRfQCyycJ7zMHb0DjoOWQLfBhBVPQr_BJBbe7YUsA6uA7C5e4M1wofQ0FD2M1UGb9Rg/pub?output=csv"
+  },
+  "mural": {
+    "formAction": "",
+    "campoNome": "",
+    "campoMensagem": "",
+    "csv": ""
   }
 }

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mural · Amigo da Onça</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=202611222219">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="emoji-grande" aria-hidden="true">📣</span>
+      <h1>Mural</h1>
+      <p>Recado, ameaça, provocação. Todo mundo vê, com seu nome.</p>
+      <p class="en" lang="en">Public wall. Everyone sees your name.</p>
+    </section>
+
+    <section class="cartao">
+      <form id="form-mural" novalidate>
+        <label for="mural-nome">Quem é você?</label>
+        <select id="mural-nome" required></select>
+        <label for="mural-senha">Sua senha (a da inscrição)</label>
+        <input id="mural-senha" type="password" autocomplete="current-password" required>
+        <label for="mural-texto">Mensagem</label>
+        <textarea id="mural-texto" maxlength="280" required placeholder="Ex.: já comprei seu presente e ele é molhado"></textarea>
+        <p class="oculto" id="mural-aviso" role="status"></p>
+        <p style="text-align:center;margin:16px 0 0">
+          <button class="botao" id="mural-enviar" type="submit">Postar</button>
+        </p>
+      </form>
+    </section>
+
+    <section class="cartao">
+      <h2>🗞️ Últimas</h2>
+      <div id="lista-mural">Aguardando mensagem. Essa ação pode levar alguns instantes.</div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tweetnacl/1.0.3/nacl-fast.min.js"></script>
+  <script src="assets/js/cripto.js?v=202611222219"></script>
+  <script src="assets/js/config.js?v=202611222219"></script>
+  <script src="assets/js/layout.js?v=202611222219"></script>
+  <script src="assets/js/figurinhas.js?v=202611222219" defer></script>
+  <script src="assets/js/dados.js?v=202611222219"></script>
+  <script src="assets/js/mural.js?v=202611222219"></script>
+</body>
+</html>

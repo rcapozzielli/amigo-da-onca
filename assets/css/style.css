@@ -274,3 +274,22 @@ textarea { min-height: 110px; resize: vertical; }
 .botao-grande { font-size: 1.2rem; padding: 16px 28px; }
 .voce-dentro { background: var(--mar); color: var(--noite); font-weight: 800; border-radius: 12px; padding: 10px 14px; }
 .voce-dentro a { color: var(--noite); }
+
+/* ---------- Termômetro ---------- */
+.termometro { display: grid; gap: 8px; }
+.termo-linha { display: grid; grid-template-columns: minmax(70px, 120px) 1fr auto; gap: 10px; align-items: center; font-weight: 700; font-size: .9rem; }
+.termo-nome { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.termo-barra { height: 14px; background: var(--areia); border-radius: 999px; overflow: hidden; }
+.termo-barra span { display: block; height: 100%; background: linear-gradient(90deg, var(--onca), var(--coral)); border-radius: 999px; transition: width .8s ease; }
+.termo-num { min-width: 3.5em; text-align: right; }
+
+/* ---------- Roleta (dia da troca) ---------- */
+.relogio-troca { font-family: "Bagel Fat One", sans-serif; font-size: 1.6rem; color: var(--onca); margin: 0; }
+.roleta { font-family: "Bagel Fat One", sans-serif; font-size: clamp(2rem, 10vw, 3rem); color: var(--texto-claro); margin: 6px 0; min-height: 1.3em; }
+.roleta-fim { color: var(--onca); animation: surge .6s cubic-bezier(.2, 1.6, .4, 1); }
+
+/* ---------- Mural ---------- */
+.recado { background: var(--areia); border-radius: 12px; padding: 10px 14px; margin: 0 0 12px; border-left: 6px solid var(--mar); transform: rotate(var(--giro, 0deg)); }
+.recado-topo { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 4px; font-size: .85rem; }
+.recado-topo span { opacity: .65; }
+.recado-texto { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }

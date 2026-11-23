@@ -89,6 +89,17 @@ O script abre o resultado da pessoa só na memória e tranca de novo com a chave
 ### Refazer o sorteio do zero
 `python scripts/sortear.py --refazer`, depois commit e push. Todo mundo vai ter um resultado novo.
 
+### Mural de mensagens (terceiro Forms)
+1. Crie um Forms "Mural" com duas perguntas: `Nome` (resposta curta) e `Mensagem` (parágrafo).
+   Publique, deixe "qualquer pessoa com o link", sem login.
+2. Vincule a uma planilha e publique a aba como CSV (igual aos outros dois).
+3. Preencha `mural` em `data/config.json` (formAction, campoNome, campoMensagem, csv).
+Para apagar uma mensagem, apague a linha na planilha.
+
+### Noite da troca ("É HOJE")
+Preencha `dataTroca` em `assets/js/config.js` (ex.: `"2026-12-31T20:00:00-03:00"`).
+No dia, a home vira a tela "É HOJE" com contador e a roleta de quem começa.
+
 ### Mudou CSS ou JS?
 Rode `python scripts/versao.py` antes do commit. Ele atualiza o `?v=...` dos arquivos nas páginas
 e obriga o navegador de todo mundo a baixar a versão nova.

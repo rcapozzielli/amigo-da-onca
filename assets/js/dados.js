@@ -93,6 +93,47 @@
       .filter(Boolean);
   }
 
+  // Quantas sugestões cada participante recebeu: Map(nome -> número). Não expõe o conteúdo.
+  async function contagemSugestoes() {
+    const cfg = await config();
+    const mapa = new Map((await participantes()).map((n) => [n, 0]));
+    if (!cfg.sugestoes.csv) return mapa;
+    (await lerCSV(cfg.sugestoes.csv)).forEach((l) => {
+      const n = Onca.normalizar(coluna(l, "para"));
+      if (mapa.has(n)) mapa.set(n, mapa.get(n) + 1);
+    });
+    return mapa;
+  }
+
+  // Converte "11/22/2026 21:08:12" (formato da planilha) em Date. Devolve null se não entender.
+  function lerData(texto) {
+    const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4}) (\d{1,2}):(\d{2})/.exec(texto || "");
+    return m ? new Date(+m[3], +m[1] - 1, +m[2], +m[4], +m[5]) : null;
+  }
+
+  // Mensagens do mural, mais novas primeiro: [{nome, texto, data}].
+  async function mensagensMural() {
+    const cfg = await config();
+    if (!cfg.mural || !cfg.mural.csv) throw new Error("sem-config");
+    const nomes = new Set(await participantes());
+    return (await lerCSV(cfg.mural.csv))
+      .map((l) => ({
+        nome: Onca.normalizar(coluna(l, "nome")),
+        texto: coluna(l, "mensag"),
+        data: lerData(coluna(l, "timestamp") || coluna(l, "carimbo")),
+      }))
+      .filter((m) => m.texto && nomes.has(m.nome))
+      .reverse();
+  }
+
+  // Confere nome + senha contra a inscrição. Devolve "ok", "senha" (não bate) ou "sem-inscricao".
+  async function conferirSenha(nome, senha) {
+    const [chaves, par] = await Promise.all([chavesInscritas(), Onca.derivarChaves(nome, senha)]);
+    const registrada = chaves.get(nome);
+    if (!registrada) return "sem-inscricao";
+    return registrada === Onca.b64(par.publicKey) ? "ok" : "senha";
+  }
+
   // Envia para o Google Forms. Com no-cors não dá para ler a resposta: se não houve erro de rede, deu certo.
   async function enviarForm(formAction, campos) {
     const corpo = new URLSearchParams(campos);
@@ -136,5 +177,5 @@
     }
   }
 
-  window.Dados = { config, participantes, sorteio, inscritos, chavesInscritas, sugestoesPara, enviarForm, preencherSelect, mostrarProgresso };
+  window.Dados = { config, participantes, sorteio, inscritos, chavesInscritas, contagemSugestoes, mensagensMural, conferirSenha, sugestoesPara, enviarForm, preencherSelect, mostrarProgresso };
 })();
