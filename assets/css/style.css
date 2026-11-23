@@ -221,22 +221,26 @@ textarea { min-height: 110px; resize: vertical; }
   60% { transform: rotate(calc(var(--giro) - 10deg)) scale(1.05); }
 }
 
-/* Mural (padrão: celular) */
-.mural-figurinhas {
-  display: flex;
-  gap: 22px;
-  overflow-x: auto;
-  padding: 22px 8px 26px;
-  margin: 8px -16px 0;
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
-}
-.mural-figurinhas .figurinha { scroll-snap-align: center; }
+/* Celular: leque no topo e figurinhas coladas nos cantos dos cards */
+.cartao { position: relative; }
+.figurinha-mini { width: 76px; padding: 4px 4px 3px; border-radius: 4px; }
+.figurinha-mini::before { width: 30px; height: 11px; top: -6px; }
+.figurinha.figurinha-mini img { height: 64px; }
+.figurinha-mini figcaption { display: none; }
+.leque-figurinhas { display: flex; justify-content: center; margin-top: 14px; }
+.leque-figurinhas .figurinha-mini { width: 92px; margin: 0 -8px; }
+.leque-figurinhas .figurinha.figurinha-mini img { height: 86px; }
+.leque-figurinhas .figurinha-mini:nth-child(1) { --giro: -12deg; margin-top: 10px; }
+.leque-figurinhas .figurinha-mini:nth-child(2) { --giro: 2deg; z-index: 1; }
+.leque-figurinhas .figurinha-mini:nth-child(3) { --giro: 13deg; margin-top: 10px; }
+.no-canto { position: absolute; top: -44px; right: -8px; z-index: 2; width: 68px; }
+.com-figurinha > h2:first-child { padding-right: 50px; }
 
 /* Laterais: só em telas largas */
 .figurinhas-laterais { display: none; }
 @media (min-width: 1150px) {
-  .mural-figurinhas { display: none; }
+  .leque-figurinhas, .figurinha-mini { display: none; }
+  .com-figurinha > h2:first-child { padding: 0 !important; }
   .figurinhas-laterais { display: block; }
   .figurinhas-laterais .figurinha { position: absolute; }
   .lado-esquerdo { left: max(16px, calc(50% - 380px - 200px)); }

@@ -97,11 +97,34 @@
   });
   document.body.appendChild(lados);
 
-  // Mural (celular e telas estreitas)
-  const mural = document.createElement("section");
-  mural.className = "mural-figurinhas";
-  mural.setAttribute("aria-label", "Figurinhas");
-  sorteadas.forEach((f) => mural.appendChild(criar(f)));
-  const main = document.querySelector("main");
-  if (main) main.appendChild(mural);
+  // ---------- Celular e telas estreitas (o CSS esconde isso nas telas largas) ----------
+  // Só figurinhas com foto: as de texto ficam ilegíveis em tamanho pequeno.
+  const comFoto = sorteadas.filter((f) => f.img);
+
+  function mini(f, classe) {
+    const el = criar(f);
+    el.classList.add("figurinha-mini", classe);
+    el.setAttribute("aria-hidden", "true");
+    return el;
+  }
+
+  // 2) Leque de 3 figurinhas no topo, logo abaixo do título
+  const hero = document.querySelector("main .hero");
+  if (hero) {
+    const leque = document.createElement("div");
+    leque.className = "leque-figurinhas";
+    comFoto.slice(0, 3).forEach((f) => leque.appendChild(mini(f, "no-leque")));
+    hero.appendChild(leque);
+  }
+
+  // 1) Uma figurinha colada no canto de cada card.
+  // O painel da home é pulado porque o conteúdo dele é redesenhado pelo home.js.
+  const cards = [...document.querySelectorAll("main > section.cartao")].filter((c) => c.id !== "painel");
+  cards.forEach((card, i) => {
+    const f = comFoto[(3 + i) % comFoto.length];
+    card.classList.add("com-figurinha");
+    const el = mini(f, "no-canto");
+    el.style.setProperty("--giro", (i % 2 ? 9 : -7) + "deg");
+    card.appendChild(el);
+  });
 })();
