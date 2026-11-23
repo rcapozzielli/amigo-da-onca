@@ -25,6 +25,6 @@
 
   document.body.insertAdjacentHTML(
     "beforeend",
-    `<footer class="rodape">Réveillon Juquehy 2027 · vibecodado no Claude por um larper</footer>`
+    `<footer class="rodape">Réveillon Juquehy 2027 · vibecodado no Claude por um larper · <a href="creditos.html">créditos das imagens</a></footer>`
   );
 })();

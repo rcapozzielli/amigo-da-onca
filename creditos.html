@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Créditos · Amigo da Onça</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="emoji-grande" aria-hidden="true">📸</span>
+      <h1>Créditos</h1>
+      <p>As figurinhas usam imagens do Wikimedia Commons, com licença livre.</p>
+    </section>
+
+    <section class="cartao">
+      <ul class="ideias" id="lista-creditos"><li>Aguardando mensagem. Essa ação pode levar alguns instantes.</li></ul>
+    </section>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script>
+    (async function () {
+      const lista = document.getElementById("lista-creditos");
+      const creditos = await (await fetch("data/creditos.json")).json();
+      lista.innerHTML = "";
+      Object.values(creditos).forEach((c) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = c.pagina;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = c.titulo;
+        li.append(a, ` — ${c.autor || "autor desconhecido"} · ${c.licenca} (redimensionada)`);
+        lista.appendChild(li);
+      });
+    })();
+  </script>
+</body>
+</html>

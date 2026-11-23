@@ -185,4 +185,63 @@ textarea { min-height: 110px; resize: vertical; }
 
 /* ---------- Legenda em inglês (pra gringa) ---------- */
 .en { display: block; font-size: .85rem; font-style: italic; opacity: .75; margin-top: 4px; }
-.en::before { content: "🇺🇸 "; font-style: normal; }
+.en::before { content: "EN · "; font-style: normal; font-weight: 800; }
+
+/* ---------- Figurinhas (decoração) ---------- */
+.figurinha {
+  margin: 0;
+  width: 150px;
+  flex: 0 0 auto;
+  background: #fff;
+  padding: 8px 8px 6px;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(36, 26, 18, .25);
+  transform: rotate(var(--giro, -4deg));
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.figurinha::before { /* fita adesiva */
+  content: "";
+  position: absolute; top: -9px; left: 50%;
+  width: 56px; height: 18px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgba(233, 162, 59, .55);
+}
+.figurinha img { display: block; width: 100%; height: 120px; object-fit: cover; border-radius: 3px; }
+.figurinha figcaption { font-size: .78rem; font-weight: 800; margin-top: 6px; line-height: 1.2; }
+.figurinha-texto { background: var(--onca); padding: 18px 10px; }
+.figurinha-texto strong { display: block; font-family: "Bagel Fat One", sans-serif; font-weight: 400; font-size: 1.15rem; line-height: 1.1; color: var(--onca-escura); }
+.figurinha-texto span { display: block; font-size: .75rem; font-weight: 700; margin-top: 4px; }
+.figurinha.chacoalha { animation: chacoalha .5s ease; }
+@keyframes chacoalha {
+  0%, 100% { transform: rotate(var(--giro)); }
+  25% { transform: rotate(calc(var(--giro) + 14deg)) scale(1.08); }
+  60% { transform: rotate(calc(var(--giro) - 10deg)) scale(1.05); }
+}
+
+/* Mural (padrão: celular) */
+.mural-figurinhas {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  padding: 22px 8px 26px;
+  margin: 8px -16px 0;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.mural-figurinhas .figurinha { scroll-snap-align: center; }
+
+/* Laterais: só em telas largas */
+.figurinhas-laterais { display: none; }
+@media (min-width: 1150px) {
+  .mural-figurinhas { display: none; }
+  .figurinhas-laterais { display: block; }
+  .figurinhas-laterais .figurinha { position: absolute; }
+  .lado-esquerdo { left: max(16px, calc(50% - 380px - 200px)); }
+  .lado-direito { right: max(16px, calc(50% - 380px - 200px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .figurinha.chacoalha, .hero .emoji-grande { animation: none; }
+}
