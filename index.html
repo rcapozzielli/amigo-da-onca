@@ -25,12 +25,28 @@
       <p class="painel-carregando">Aguardando mensagem. Essa ação pode levar alguns instantes.</p>
     </section>
 
+    <section class="cartao">
+      <h2>🤫 Sugira um presente</h2>
+      <p style="margin-top:0">Anônimo. Só quem tirou a pessoa vai ver.</p>
+      <form id="form-sugestao" novalidate>
+        <label for="para">Pra quem?</label>
+        <select id="para" required></select>
+        <label for="texto">Ideia de presente ruim</label>
+        <textarea id="texto" maxlength="500" required placeholder="Ex.: um Código do Consumidor encadernado"></textarea>
+        <p class="erro oculto" id="erro" role="alert"></p>
+        <p style="text-align:center;margin:16px 0 0">
+          <button class="botao botao-mar" id="botao-enviar" type="submit">Mandar sugestão</button>
+        </p>
+      </form>
+      <p class="ok oculto" id="sucesso" role="status">✅ Boa crack! Pode mandar outra.</p>
+    </section>
+
     <section class="cartao" style="text-align:center">
       <h2>🎲 Ideia ruim do dia</h2>
       <p class="ideia-sorteada" id="ideia-dia"></p>
       <p style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:0">
         <button class="botao" id="outra-ideia" type="button">Outra</button>
-        <a class="botao botao-mar" href="sugerir.html">🤫 Sugerir pra alguém</a>
+        <a class="botao botao-mar" href="ideias.html">Ver todas</a>
       </p>
     </section>
 
@@ -50,6 +66,7 @@
   <script src="assets/js/dados.js"></script>
   <script src="assets/js/contador.js"></script>
   <script src="assets/js/home.js"></script>
+  <script src="assets/js/sugerir.js"></script>
   <script async src="https://www.tiktok.com/embed.js"></script>
 </body>
 </html>
