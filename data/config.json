@@ -1,14 +1,14 @@
 {
   "cadastro": {
-    "formAction": "",
-    "campoNome": "",
-    "campoChave": "",
-    "csv": ""
+    "formAction": "https://docs.google.com/forms/d/e/1FAIpQLSeF2j4PtyGGWRBp1SwlCgFehB8q6Vw11J5U1Dt5kt--O6m1HA/formResponse",
+    "campoNome": "entry.763709867",
+    "campoChave": "entry.689478760",
+    "csv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTiOzMU-zP92upCRlTuJfcLLGaXrltbmrUYDD0idtDsbPW-kLcmL2g4MNF_S3JJsGvIQ0oOAEo1CNns/pub?output=csv"
   },
   "sugestoes": {
-    "formAction": "",
-    "campoPara": "",
-    "campoTexto": "",
-    "csv": ""
+    "formAction": "https://docs.google.com/forms/d/e/1FAIpQLSe_tU7WXg68V5xrTY6rZ5GapxPdzA-pnm06xZKcFBBBmsAubA/formResponse",
+    "campoPara": "entry.1935383169",
+    "campoTexto": "entry.526153208",
+    "csv": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQCaZjP-FiatGRfQCyycJ7zMHb0DjoOWQLfBhBVPQr_BJBbe7YUsA6uA7C5e4M1wofQ0FD2M1UGb9Rg/pub?output=csv"
   }
 }
