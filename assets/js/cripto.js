@@ -40,5 +40,53 @@
     return new TextDecoder().decode(dados).replace(/ +$/, "");
   }
 
-  global.Onca = { normalizar, b64, deB64, derivarChaves, abrir, ITERACOES };
+  // ---------- Pedido anônimo ----------
+
+  // Envelope para a chave pública `destino` (bytes). O texto é completado com espaços até um múltiplo
+  // de 256 bytes, para o tamanho do envelope não entregar o tamanho da mensagem. `abrir` tira os espaços.
+  function lacrar(texto, destino) {
+    const dados = new TextEncoder().encode(texto);
+    const cheio = new Uint8Array(Math.ceil((dados.length + 1) / 256) * 256).fill(32);
+    cheio.set(dados);
+    const efemera = nacl.box.keyPair();
+    const nonce = nacl.randomBytes(nacl.box.nonceLength);
+    const ct = nacl.box(cheio, nonce, destino, efemera.secretKey);
+    return { epk: b64(efemera.publicKey), nonce: b64(nonce), ct: b64(ct) };
+  }
+
+  function abrirJSON(envelope, chaveSecreta) {
+    try {
+      const texto = abrir(envelope, chaveSecreta);
+      return texto === null ? null : JSON.parse(texto);
+    } catch (e) {
+      return null; // envelope malformado: trata como "não é para mim"
+    }
+  }
+
+  // Par de chaves para receber as respostas de um pedido. Sai da chave secreta de quem pediu + id do
+  // pedido, então dá para recriar quando quiser sem guardar nada.
+  async function chaveResposta(idPedido, chaveSecreta) {
+    const prefixo = new TextEncoder().encode("amigo-da-onca:resposta:" + idPedido);
+    const tudo = new Uint8Array(prefixo.length + chaveSecreta.length);
+    tudo.set(prefixo);
+    tudo.set(chaveSecreta, prefixo.length);
+    const semente = new Uint8Array(await crypto.subtle.digest("SHA-256", tudo));
+    return nacl.box.keyPair.fromSecretKey(semente);
+  }
+
+  // Cifra bytes (foto) com uma chave aleatória. Quem tem {chave, nonce} decifra.
+  function cifrarBytes(bytes) {
+    const chave = nacl.randomBytes(nacl.secretbox.keyLength);
+    const nonce = nacl.randomBytes(nacl.secretbox.nonceLength);
+    return { dados: nacl.secretbox(bytes, nonce, chave), chave: b64(chave), nonce: b64(nonce) };
+  }
+
+  function decifrarBytes(dados, chave, nonce) {
+    return nacl.secretbox.open(dados, deB64(nonce), deB64(chave)); // null se não bater
+  }
+
+  global.Onca = {
+    normalizar, b64, deB64, derivarChaves, abrir, ITERACOES,
+    lacrar, abrirJSON, chaveResposta, cifrarBytes, decifrarBytes,
+  };
 })(typeof window !== "undefined" ? window : globalThis);

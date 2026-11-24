@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedido anônimo · Amigo da Onça</title>
+  <meta name="description" content="Peça fotos e material pro presente sem se entregar. Só quem recebe lê, só você vê a resposta.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Amigo da Onça">
+  <meta property="og:title" content="Pedido anônimo · Amigo da Onça">
+  <meta property="og:description" content="Peça fotos e material pro presente sem se entregar. Só quem recebe lê, só você vê a resposta.">
+  <meta property="og:url" content="https://rcapozzielli.github.io/amigo-da-onca/pedidos.html">
+  <meta property="og:image" content="https://rcapozzielli.github.io/amigo-da-onca/assets/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐆</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=202611232133">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <span class="emoji-grande" aria-hidden="true">📬</span>
+      <h1>Pedido anônimo</h1>
+      <p>Peça foto ou material pro presente. Só quem recebe lê, e não sabe quem pediu.</p>
+      <p class="en" lang="en">Anonymous requests for photos.</p>
+    </section>
+
+    <section class="cartao cartao-noite oculto" id="fechado">
+      <h2>⏳ Ainda não abriu</h2>
+      <p id="fechado-texto">Os pedidos abrem depois do sorteio. Calma🖐️</p>
+    </section>
+
+    <!-- Login -->
+    <section class="cartao oculto" id="entrar">
+      <form id="form-entrar" novalidate>
+        <label for="nome">Quem é você?</label>
+        <select id="nome" required></select>
+        <label for="senha">Sua senha</label>
+        <input id="senha" type="password" autocomplete="current-password" required>
+        <p class="erro oculto" id="erro" role="alert"></p>
+        <p style="text-align:center;margin:16px 0 0">
+          <button class="botao" id="botao-entrar" type="submit">Entrar</button>
+        </p>
+        <p style="font-size:.9rem">A senha não sai do seu celular. Ela só abre os envelopes que são seus.</p>
+      </form>
+    </section>
+
+    <!-- Depois do login -->
+    <section class="oculto" id="logado">
+      <nav class="abas" role="tablist">
+        <button class="aba" type="button" role="tab" data-aba="pedir" aria-selected="true">✍️ Pedir</button>
+        <button class="aba" type="button" role="tab" data-aba="recebidos">📥 Recebidos <span id="num-recebidos"></span></button>
+        <button class="aba" type="button" role="tab" data-aba="meus">📦 Meus pedidos <span id="num-meus"></span></button>
+      </nav>
+
+      <section class="cartao painel-aba" id="aba-pedir">
+        <h2>✍️ Fazer pedido</h2>
+        <form id="form-pedir" novalidate>
+          <label for="pedir-para">Pedir pra quem?</label>
+          <select id="pedir-para" required></select>
+          <p class="vergonha-sub" style="margin:6px 0 0">Quem você tirou não aparece aqui, pra não estragar a surpresa.</p>
+          <label for="pedir-texto">Pedido</label>
+          <textarea id="pedir-texto" maxlength="500" required placeholder="Ex.: manda foto do fulano dormindo de boca aberta"></textarea>
+          <p class="vergonha-sub" style="margin:6px 0 0">Não assina, não cita seu nome. A graça é ser anônimo.</p>
+          <p class="oculto" id="pedir-aviso" role="status"></p>
+          <p style="text-align:center;margin:16px 0 0"><button class="botao" id="pedir-enviar" type="submit">Mandar pedido</button></p>
+        </form>
+      </section>
+
+      <section class="cartao painel-aba oculto" id="aba-recebidos">
+        <h2>📥 Pedidos pra você</h2>
+        <p class="vergonha-sub" style="margin-top:0">Recebeu pedido? Ajuda e fica quieto. Contar pro alvo é coisa de antiresenha.</p>
+        <div id="lista-recebidos"></div>
+      </section>
+
+      <section class="cartao painel-aba oculto" id="aba-meus">
+        <h2>📦 Seus pedidos</h2>
+        <p class="vergonha-sub" style="margin-top:0">As respostas chegam aqui. Só você vê.</p>
+        <div id="lista-meus"></div>
+      </section>
+
+      <p style="text-align:center"><button class="botao botao-mar" id="botao-sair" type="button">Sair</button></p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tweetnacl/1.0.3/nacl-fast.min.js"></script>
+  <script src="assets/js/cripto.js?v=202611232133"></script>
+  <script src="assets/js/config.js?v=202611232133"></script>
+  <script src="assets/js/layout.js?v=202611232133"></script>
+  <script src="assets/js/figurinhas.js?v=202611232133" defer></script>
+  <script src="assets/js/dados.js?v=202611232133"></script>
+  <script src="assets/js/banco.js?v=202611232133"></script>
+  <script src="assets/js/pedidos.js?v=202611232133"></script>
+</body>
+</html>

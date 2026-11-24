@@ -96,6 +96,31 @@ O script abre o resultado da pessoa só na memória e tranca de novo com a chave
 3. Preencha `mural` em `data/config.json` (formAction, campoNome, campoMensagem, csv).
 Para apagar uma mensagem, apague a linha na planilha.
 
+### Pedido anônimo (Supabase)
+Quem tirou alguém pede foto/material para outra pessoa sem se identificar. Fica em `pedidos.html`.
+- Pedido, resposta e fotos são cifrados no celular antes de sair. No banco só tem ruído:
+  nem o organizador nem quem administra o Supabase lê ou vê nada.
+- O pedido vai para a chave pública de quem recebe (a mesma do sorteio). A resposta vai para uma
+  "chave de resposta" que só quem pediu recria (sai da senha dele + id do pedido).
+- As fotos são reduzidas para no máximo 2560 px (dá para imprimir) e perdem o EXIF (localização).
+
+Configurar (uma vez):
+1. Crie um projeto em supabase.com (plano gratuito).
+2. Abra **SQL Editor**, cole `supabase/esquema.sql` e rode. Ele cria as tabelas, as regras de acesso
+   (só ler e inserir) e o bucket `fotos`.
+3. Em **Project Settings > API**, copie a URL do projeto e a chave **pública** (anon / publishable)
+   para `data/config.json` > `supabase`. Essa chave foi feita para ficar pública.
+   **Nunca** copie a chave `service_role` / secret para o repositório.
+
+Manutenção:
+- Projeto gratuito pausa após um tempo sem uso. Se a página disser "Não consegui carregar", abra o
+  painel do Supabase e clique em **Restore/Resume**.
+- Zerar dados de teste (SQL Editor): `truncate public.respostas, public.pedidos;` e apague os
+  arquivos do bucket `fotos` em **Storage**.
+- Depois da viagem: apague o projeto em **Project Settings > General > Delete project**.
+- Esqueceu a senha? Depois do `recuperar.py` a pessoa pede de novo; respostas antigas ficam presas
+  na senha antiga.
+
 ### Noite da troca ("É HOJE")
 Preencha `dataTroca` em `assets/js/config.js` (ex.: `"2026-12-31T20:00:00-03:00"`).
 No dia, a home vira a tela "É HOJE" com contador e a roleta de quem começa.

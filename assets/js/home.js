@@ -176,6 +176,16 @@
   }
   }
 
+  // Pedido anônimo: só o total (os pedidos são cifrados; ninguém sabe de quem nem pra quem).
+  async function montarPedidos() {
+    const saida = document.getElementById("pedidos-total");
+    try {
+      saida.textContent = (await Banco.listar("pedidos", "id")).length;
+    } catch (e) {
+      saida.textContent = e.message === "sem-config" ? "em breve" : "?";
+    }
+  }
+
   // Tudo carrega em paralelo: a planilha lenta não segura o resto da página.
-  montarPainel(); montarTermometro(); montarMural(); montarIdeia();
+  montarPainel(); montarTermometro(); montarMural(); montarIdeia(); montarPedidos();
 })();
